@@ -94,12 +94,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'safepackisg.wsgi.application'
 
 # ─── Veritabanı ───────────────────────────────────
-# Geliştirme: SQLite | Üretim: DATABASE_URL ile PostgreSQL
+# Railway postgresql:// → postgres:// dönüşümü
+_db_url = os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR / "db.sqlite3"}')
+if _db_url.startswith('postgresql://'):
+    _db_url = _db_url.replace('postgresql://', 'postgres://', 1)
+
 DATABASES = {
-    'default': env.db(
-        'DATABASE_URL',
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
-    )
+    'default': env.db_url_config(_db_url)
 }
 
 # ─── Şifre Doğrulama ──────────────────────────────
