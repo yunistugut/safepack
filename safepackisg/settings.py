@@ -24,6 +24,10 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-gecici-key-lutfen-degist
 DEBUG = env('DEBUG')
 
 # ALLOWED_HOSTS: .env'den veya Render ortam değişkeninden oku
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',
+    'https://safepack-production.up.railway.app',
+]
 _allowed = env('ALLOWED_HOSTS', default='localhost,127.0.0.1')
 if isinstance(_allowed, str):
     ALLOWED_HOSTS = [h.strip() for h in _allowed.split(',')]
