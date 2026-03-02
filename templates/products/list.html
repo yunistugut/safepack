@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Sayfa yolu">
+      <a href="{% url 'core:home' %}">Anasayfa</a>
+      <span>›</span>
+      <span aria-current="page">Ürünler</span>
+    </nav>
+    <h1>Ürün Kataloğu</h1>
+    <p>CE belgeli iş güvenliği ekipmanları ve ambalaj malzemeleri</p>
+  </div>
+</div>
+
+<div class="page-body">
+  {# ── FİLTRE SIDEBAR ── #}
+  <aside class="sidebar" aria-label="Ürün filtreleri">
+    <form method="get" id="filter-form">
+      <div class="filter-card">
+        <div class="filter-card-head">🗂️ Kategoriler</div>
+        <div class="filter-body">
+          {% for cat in categories %}
+          <label class="filter-item">
+            <input type="radio" name="kategori" value="{{ cat.slug }}"
+                   {% if active_category == cat.slug %}checked{% endif %}
+                   onchange="this.form.submit()">
+            <label>{{ cat.icon }} {{ cat.name }} <span class="filter-count">{{ cat.product_count }}</span></label>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="filter-card">
+        <div class="filter-card-head">🏷️ Markalar</div>
+        <div class="filter-body">
+          {% for brand in brands %}
+          <label class="filter-item">
+            <input type="checkbox" name="marka" value="{{ brand.slug }}"
+                   {% if brand.slug in active_brands %}checked{% endif %}>
+            <label>{{ brand.name }}</label>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="filter-card">
+        <div class="filter-card-head">✅ Sertifika</div>
+        <div class="filter-body">
+          {% for cert in certificates %}
+          <label class="filter-item">
+            <input type="checkbox" name="sertifika" value="{{ cert.id }}"
+                   {% if cert.id|stringformat:"s" in active_certs %}checked{% endif %}>
+            <label>{{ cert.code }}</label>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div style="display:flex;gap:.5rem;">
+        <button type="submit" class="btn-filter-reset" style="background:var(--mavi);color:#fff;border-color:var(--mavi);">Filtrele</button>
+        <a href="{% url 'products:list' %}" class="btn-filter-reset">✕ Temizle</a>
+      </div>
+    </form>
+  </aside>
+
+  {# ── ÜRÜNLER ── #}
+  <section class="products-area" aria-labelledby="urunler-baslik">
+    <h2 id="urunler-baslik" class="visually-hidden">Ürün Listesi</h2>
+
+    <div class="products-topbar">
+      <div class="products-topbar-left">
+        <strong>{{ total_count }}</strong> ürün listeleniyor
+        {% if query %} — "<em>{{ query }}</em>" araması{% endif %}
+      </div>
+      <div class="products-topbar-right">
+        <form method="get" style="display:contents;">
+          {% if active_category %}<input type="hidden" name="kategori" value="{{ active_category }}">{% endif %}
+          <select class="sort-select" name="siralama" onchange="this.form.submit()" aria-label="Sıralama">
+            <option value="" {% if not sort %}selected{% endif %}>Varsayılan</option>
+            <option value="az" {% if sort == 'az' %}selected{% endif %}>A → Z</option>
+            <option value="za" {% if sort == 'za' %}selected{% endif %}>Z → A</option>
+            <option value="yeni" {% if sort == 'yeni' %}selected{% endif %}>Yeni Eklenenler</option>
+          </select>
+        </form>
+      </div>
+    </div>
+
+    {# Arama kutusu #}
+    <form method="get" style="margin-bottom:1.2rem;display:flex;gap:.5rem;">
+      {% if active_category %}<input type="hidden" name="kategori" value="{{ active_category }}">{% endif %}
+      <input type="search" name="q" value="{{ query }}" placeholder="Ürünlerde ara…"
+             class="sort-select" style="flex:1;" aria-label="Ürünlerde ara">
+      <button type="submit" style="padding:.4rem 1rem;background:var(--mavi);color:#fff;border:none;border-radius:8px;cursor:pointer;">🔍</button>
+    </form>
+
+    {% if page_obj %}
+    <div class="urun-grid" role="list">
+      {% for product in page_obj %}
+      <article class="urun-kart" role="listitem" itemscope itemtype="https://schema.org/Product">
+        <a href="{{ product.get_absolute_url }}" aria-label="{{ product.name }} detayı">
+          <div class="urun-gorsel" aria-hidden="true">
+            {% if product.thumbnail %}
+              <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" loading="lazy">
+            {% else %}
+              {{ product.category.icon }}
+            {% endif %}
+            {% if product.badge %}
+            <div class="urun-etiket etiket-{{ product.badge }}">{{ product.get_badge_display }}</div>
+            {% endif %}
+          </div>
+          <div class="urun-bilgi">
+            <div class="urun-kat" itemprop="category">{{ product.category.name }}</div>
+            <h2 itemprop="name">{{ product.name }}</h2>
+            <p itemprop="description">{{ product.short_description|truncatechars:90 }}</p>
+            <div class="urun-footer">
+              <span class="urun-standart">{{ product.certificate_codes|truncatechars:20 }}</span>
+              <span class="urun-detay-btn">Detay →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+
+    {# PAGİNASYON #}
+    {% if page_obj.has_other_pages %}
+    <nav class="pagination" aria-label="Sayfa navigasyonu">
+      {% if page_obj.has_previous %}
+      <a class="page-btn" href="?sayfa={{ page_obj.previous_page_number }}{% if active_category %}&kategori={{ active_category }}{% endif %}" aria-label="Önceki">‹</a>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <span class="page-btn active" aria-current="page">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="page-btn" href="?sayfa={{ num }}{% if active_category %}&kategori={{ active_category }}{% endif %}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <a class="page-btn" href="?sayfa={{ page_obj.next_page_number }}{% if active_category %}&kategori={{ active_category }}{% endif %}" aria-label="Sonraki">›</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <div style="text-align:center;padding:4rem 2rem;color:var(--metin-acik);">
+      <div style="font-size:4rem;margin-bottom:1rem;">🔍</div>
+      <h3 style="font-family:'Nunito',sans-serif;font-weight:800;margin-bottom:.5rem;">Ürün bulunamadı</h3>
+      <p>Farklı filtreler deneyebilir veya <a href="{% url 'products:list' %}" style="color:var(--mavi);">tüm ürünleri</a> görüntüleyebilirsiniz.</p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

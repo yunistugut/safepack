@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Sayfa yolu">
+      <a href="{% url 'core:home' %}">Anasayfa</a><span>›</span>
+      <span aria-current="page">Sertifikalarımız</span>
+    </nav>
+    <h1>✅ Sertifikalarımız</h1>
+    <p>Tüm ürünlerimiz uluslararası iş güvenliği standartlarına uygun ve belgelenmiştir.</p>
+  </div>
+</div>
+
+<div class="container" style="padding: 4rem 2rem;">
+
+  {# AÇIKLAMA #}
+  <div style="max-width:720px;margin:0 auto 4rem;text-align:center;">
+    <p style="font-size:1rem;color:var(--metin-acik);line-height:1.8;">
+      SafePackISG olarak tedarik ettiğimiz tüm kişisel koruyucu donanımlar (KKD) ve ambalaj ürünleri,
+      Avrupa Birliği direktifleri, Türk Standartları ve ilgili EN normları çerçevesinde
+      test edilmiş ve sertifikalandırılmıştır.
+    </p>
+  </div>
+
+  {# SERTİFİKA KARTLARI #}
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:5rem;">
+    {% for cert in certificates %}
+    <div style="background:var(--beyaz);border:1.5px solid var(--gri2);border-radius:16px;padding:2rem 1.5rem;transition:box-shadow .2s,transform .2s;"
+         onmouseenter="this.style.boxShadow='0 8px 32px rgba(27,79,138,.12)';this.style.transform='translateY(-4px)'"
+         onmouseleave="this.style.boxShadow='';this.style.transform=''">
+      <div style="width:52px;height:52px;background:rgba(27,79,138,.08);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem;">✅</div>
+      <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;color:var(--koyu);margin-bottom:.4rem;">{{ cert.name }}</h3>
+      <span style="display:inline-block;background:rgba(244,121,32,.1);color:var(--turuncu);font-family:'Nunito',sans-serif;font-weight:800;font-size:.72rem;padding:.2rem .7rem;border-radius:20px;margin-bottom:.8rem;">{{ cert.code }}</span>
+      {% if cert.description %}
+      <p style="font-size:.83rem;color:var(--metin-acik);line-height:1.6;">{{ cert.description }}</p>
+      {% endif %}
+    </div>
+    {% empty %}
+    <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--metin-acik);">
+      <p>Henüz sertifika eklenmemiş.</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {# YASAL ÇERÇEVE #}
+  <div style="background:var(--gri);border-radius:18px;padding:3rem;margin-bottom:3rem;">
+    <h2 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.4rem;color:var(--mavi);margin-bottom:1.5rem;text-align:center;">📋 Yasal Çerçeve</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+      <div>
+        <h4 style="font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;color:var(--koyu);margin-bottom:.6rem;">🇹🇷 Türk Mevzuatı</h4>
+        <ul style="font-size:.84rem;color:var(--metin-acik);line-height:1.9;padding-left:1.2rem;">
+          <li>6331 Sayılı İSG Kanunu</li>
+          <li>KKD Yönetmeliği (2016/425/AB)</li>
+          <li>Binaların Yangından Korunması Yönetmeliği</li>
+          <li>TSE Onay Prosedürleri</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;color:var(--koyu);margin-bottom:.6rem;">🇪🇺 AB Direktifleri</h4>
+        <ul style="font-size:.84rem;color:var(--metin-acik);line-height:1.9;padding-left:1.2rem;">
+          <li>PPE Regulation (EU) 2016/425</li>
+          <li>ATEX Directive 2014/34/EU</li>
+          <li>Machinery Directive 2006/42/EC</li>
+          <li>Low Voltage Directive</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;color:var(--koyu);margin-bottom:.6rem;">📐 EN Standartları</h4>
+        <ul style="font-size:.84rem;color:var(--metin-acik);line-height:1.9;padding-left:1.2rem;">
+          <li>EN 388 — Mekanik Riskler</li>
+          <li>EN 397 — Endüstriyel Baretler</li>
+          <li>EN ISO 20345 — Emniyet Ayakkabısı</li>
+          <li>EN 149 — Solunum Koruma</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {# CTA #}
+  <div style="text-align:center;padding:2rem;">
+    <p style="color:var(--metin-acik);margin-bottom:1.5rem;">Ürün sertifika belgelerini talep etmek için bizimle iletişime geçin.</p>
+    <a href="{% url 'contact:contact' %}?konu=sertifika" class="btn-cta" style="display:inline-block;padding:.9rem 2.5rem;font-size:.95rem;">
+      📋 Sertifika Belgesi Talep Et
+    </a>
+  </div>
+
+</div>
+{% endblock %}

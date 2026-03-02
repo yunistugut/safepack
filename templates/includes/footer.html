@@ -1,0 +1,55 @@
+{% load static %}
+<footer role="contentinfo" aria-label="Site alt bilgi">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="{% url 'core:home' %}" style="text-decoration:none;">
+          <div class="logo-text"><span class="blue">SafePack</span><span class="orange">ISG</span></div>
+        </a>
+        <p>İş güvenliği ve ambalaj malzemeleri alanında kapsamlı çözümler. CE belgeli, standart uyumlu ürünler.</p>
+        <div class="social-links" aria-label="Sosyal medya">
+          <a href="https://linkedin.com/company/safepackisg" class="social-link" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">in</a>
+          <a href="https://facebook.com/safepackisg" class="social-link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">fb</a>
+          <a href="https://instagram.com/safepackisg" class="social-link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">ig</a>
+          <a href="https://youtube.com/@safepackisg" class="social-link" aria-label="YouTube" rel="noopener noreferrer" target="_blank">yt</a>
+        </div>
+      </div>
+
+      <nav aria-label="Ürün kategorileri footer">
+        <h5>Ürünler</h5>
+        <ul>
+          {% for cat in nav_categories %}
+          <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <nav aria-label="Kurumsal footer">
+        <h5>Kurumsal</h5>
+        <ul>
+          <li><a href="{% url 'core:about' %}">Hakkımızda</a></li>
+          <li><a href="{% url 'core:certificates' %}">Sertifikalarımız</a></li>
+          <li><a href="{% url 'blog:list' %}">Blog</a></li>
+          <li><a href="{% url 'contact:contact' %}">İletişim</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-iletisim" itemscope itemtype="https://schema.org/Organization">
+        <h5>İletişim</h5>
+        <p>📍 <span itemprop="address">{{ CONTACT_ADDRESS }}</span></p>
+        <p>📞 <a href="tel:+90{{ CONTACT_PHONE|cut:' '|cut:'-' }}" style="color:inherit;" itemprop="telephone">{{ CONTACT_PHONE }}</a></p>
+        <p>✉ <a href="mailto:{{ CONTACT_EMAIL }}" style="color:inherit;" itemprop="email">{{ CONTACT_EMAIL }}</a></p>
+        <p>⏰ Pzt–Cuma, 08:00–18:00</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="yil">{% now "Y" %}</span> SafePackISG. Tüm hakları saklıdır.</span>
+      <div>
+        <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>
+        <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
+        <a href="/kvkk/">KVKK</a>
+      </div>
+    </div>
+  </div>
+</footer>

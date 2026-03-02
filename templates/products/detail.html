@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block og_type %}product{% endblock %}
+{% block og_image %}{% if product.thumbnail %}{{ product.thumbnail.url }}{% else %}{% static 'img/og-image.jpg' %}{% endif %}{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name|escapejs }}",
+  "description": "{{ product.short_description|escapejs }}",
+  "image": "{% if product.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ product.thumbnail.url }}{% endif %}",
+  "brand": {"@type": "Brand", "name": "{{ product.brand.name|default:'SafePackISG'|escapejs }}"},
+  "category": "{{ product.category.name|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "TRY",
+    "seller": {"@type": "Organization", "name": "SafePackISG"}
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Anasayfa","item":"{{ request.scheme }}://{{ request.get_host }}/"},
+      {"@type":"ListItem","position":2,"name":"Ürünler","item":"{{ request.scheme }}://{{ request.get_host }}/urunler/"},
+      {"@type":"ListItem","position":3,"name":"{{ product.category.name|escapejs }}","item":"{{ request.scheme }}://{{ request.get_host }}{{ product.category.get_absolute_url }}"},
+      {"@type":"ListItem","position":4,"name":"{{ product.name|escapejs }}","item":"{{ request.build_absolute_uri }}"}
+    ]
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+{# BREADCRUMB #}
+<div class="breadcrumb-bar">
+  <nav class="breadcrumb container" aria-label="Sayfa yolu">
+    <a href="{% url 'core:home' %}">Anasayfa</a><span class="sep">›</span>
+    <a href="{% url 'products:list' %}">Ürünler</a><span class="sep">›</span>
+    <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a><span class="sep">›</span>
+    <span class="current" aria-current="page">{{ product.name }}</span>
+  </nav>
+</div>
+
+<div class="product-detail container">
+
+  {# GÖRSEL ALANI #}
+  <div class="product-gallery">
+    <div class="main-image" id="main-img" aria-label="{{ product.name }} ana görseli">
+      {% if product.thumbnail %}
+        <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" id="main-img-el">
+      {% else %}
+        <div style="font-size:8rem;" aria-hidden="true">{{ product.category.icon }}</div>
+      {% endif %}
+      {% if product.badge %}
+      <div class="img-badge">{{ product.get_badge_display }}</div>
+      {% endif %}
+    </div>
+
+    {% if images %}
+    <div class="thumb-row" role="list" aria-label="Ürün görselleri">
+      {% if product.thumbnail %}
+      <div class="thumb active" role="listitem" tabindex="0"
+           onclick="switchImg('{{ product.thumbnail.url }}', this)"
+           aria-label="Ana görsel">
+        <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}">
+      </div>
+      {% endif %}
+      {% for img in images %}
+      <div class="thumb" role="listitem" tabindex="0"
+           onclick="switchImg('{{ img.image.url }}', this)"
+           aria-label="{{ img.alt_text|default:forloop.counter|stringformat:'s'|add:'. görsel' }}">
+        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {# BİLGİ ALANI #}
+  <div class="product-info" itemscope itemtype="https://schema.org/Product">
+    <div class="product-cat" itemprop="category">
+      <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a>
+    </div>
+    <h1 itemprop="name">{{ product.name }}</h1>
+
+    {# Sertifika rozetleri #}
+    {% if product.certificates.all %}
+    <div class="cert-badges">
+      {% for cert in product.certificates.all %}
+      <span class="cert-badge">✅ {{ cert.code }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="product-desc" itemprop="description">{{ product.short_description }}</p>
+
+    {# Teknik özellikler tablosu #}
+    {% if specs %}
+    <table class="spec-table" aria-label="{{ product.name }} teknik özellikleri">
+      <tbody>
+        {% for key, val in specs %}
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ val }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {# CTA butonları #}
+    <div class="product-actions">
+      <a href="{% url 'contact:contact' %}?urun={{ product.slug }}" class="btn-teklif">
+        📋 Teklif İste
+      </a>
+      {% if product.brand %}
+      <span class="btn-pdf" style="display:flex;align-items:center;gap:.5rem;">
+        🏷 {{ product.brand.name }}
+      </span>
+      {% endif %}
+    </div>
+
+    <a href="https://wa.me/{{ CONTACT_WHATSAPP }}?text={{ product.name }}+hakkında+bilgi+almak+istiyorum."
+       class="whatsapp-btn" target="_blank" rel="noopener noreferrer"
+       aria-label="WhatsApp ile {{ product.name }} hakkında bilgi al">
+      💬 WhatsApp ile Hızlı Bilgi Al
+    </a>
+  </div>
+</div>
+
+{# TAB BÖLÜM #}
+<div class="product-tabs container">
+  <div class="tabs-nav" role="tablist">
+    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-ozellik" onclick="showTab('ozellik',this)">Özellikler</button>
+    {% if product.description %}<button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-detay" onclick="showTab('detay',this)">Detaylı Açıklama</button>{% endif %}
+    {% if product.usage_areas %}<button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-kullanim" onclick="showTab('kullanim',this)">Kullanım Alanları</button>{% endif %}
+    {% if product.care_instructions %}<button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-bakim" onclick="showTab('bakim',this)">Bakım &amp; Depolama</button>{% endif %}
+  </div>
+
+  <div id="tab-ozellik" class="tab-panel active" role="tabpanel">
+    {% if specs %}
+      <table class="spec-table" style="max-width:600px;">
+        <tbody>
+          {% for key, val in specs %}<tr><td>{{ key }}</td><td>{{ val }}</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>{{ product.short_description }}</p>
+    {% endif %}
+  </div>
+
+  {% if product.description %}
+  <div id="tab-detay" class="tab-panel" role="tabpanel">{{ product.description|safe }}</div>
+  {% endif %}
+
+  {% if product.usage_areas %}
+  <div id="tab-kullanim" class="tab-panel" role="tabpanel">{{ product.usage_areas|safe }}</div>
+  {% endif %}
+
+  {% if product.care_instructions %}
+  <div id="tab-bakim" class="tab-panel" role="tabpanel">{{ product.care_instructions|safe }}</div>
+  {% endif %}
+</div>
+
+{# İLGİLİ ÜRÜNLER #}
+{% if related %}
+<section class="related" aria-labelledby="related-baslik">
+  <div class="related-inner container">
+    <div class="section-head">
+      <div class="section-eyebrow">Benzer Ürünler</div>
+      <h2 id="related-baslik">İlgili Ürünler</h2>
+    </div>
+    <div class="related-grid">
+      {% for p in related %}
+      <a href="{{ p.get_absolute_url }}" class="r-kart" itemscope itemtype="https://schema.org/Product">
+        <div class="r-gorsel">
+          {% if p.thumbnail %}<img src="{{ p.thumbnail.url }}" alt="{{ p.name }}">{% else %}{{ p.category.icon }}{% endif %}
+        </div>
+        <div class="r-bilgi">
+          <div class="r-kat">{{ p.category.name }}</div>
+          <h3 itemprop="name">{{ p.name }}</h3>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function switchImg(url, el) {
+    document.getElementById('main-img-el')?.setAttribute('src', url);
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+  }
+</script>
+{% endblock %}

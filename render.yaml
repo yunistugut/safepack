@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: safepackisg
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn safepackisg.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: safepackisg-db
+          property: connectionString
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.console.EmailBackend"
+
+databases:
+  - name: safepackisg-db
+    databaseName: safepackisg
+    user: safepackisg

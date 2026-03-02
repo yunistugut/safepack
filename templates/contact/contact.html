@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Sayfa yolu">
+      <a href="{% url 'core:home' %}">Anasayfa</a><span>›</span>
+      <span aria-current="page">İletişim</span>
+    </nav>
+    <h1>Bize Ulaşın</h1>
+    <p>Teklif almak, ürün bilgisi edinmek veya ISG danışmanlığı için iletişime geçin</p>
+  </div>
+</div>
+
+{# Kanal kartları #}
+<div class="channels">
+  <div class="channels-inner">
+    <a href="tel:+90{{ CONTACT_PHONE|cut:' '|cut:'-' }}" class="channel-card">
+      <div class="channel-icon icon-tel">📞</div>
+      <h3>Telefon</h3>
+      <p>{{ CONTACT_PHONE }}</p>
+      <small>Pzt–Cuma 08:00–18:00</small>
+    </a>
+    <a href="mailto:{{ CONTACT_EMAIL }}" class="channel-card">
+      <div class="channel-icon icon-mail">✉️</div>
+      <h3>E-posta</h3>
+      <p>{{ CONTACT_EMAIL }}</p>
+      <small>24 saat içinde yanıt</small>
+    </a>
+    <a href="https://wa.me/{{ CONTACT_WHATSAPP }}" class="channel-card" target="_blank" rel="noopener noreferrer">
+      <div class="channel-icon icon-wp">💬</div>
+      <h3>WhatsApp</h3>
+      <p>Hızlı Yanıt</p>
+      <small>Mesaj gönderin</small>
+    </a>
+    <div class="channel-card" style="cursor:default;">
+      <div class="channel-icon icon-adres">📍</div>
+      <h3>Adres</h3>
+      <p>Bozüyük, Bilecik</p>
+      <small>{{ CONTACT_ADDRESS }}</small>
+    </div>
+  </div>
+</div>
+
+<div class="contact-body">
+  {# FORM #}
+  <div>
+    <div class="form-card">
+      <h2 class="form-card-title">Teklif veya Bilgi Talebi</h2>
+      <p class="form-card-sub">Formu doldurun, en kısa sürede size ulaşalım.</p>
+
+      {% if messages %}
+        {% for message in messages %}
+        <div style="padding:1rem;background:rgba(59,170,53,.1);border:1.5px solid rgba(59,170,53,.3);border-radius:10px;color:var(--yesil);font-weight:700;margin-bottom:1.5rem;">
+          ✅ {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post" action="{% url 'contact:contact' %}" id="contact-form" novalidate>
+        {% csrf_token %}
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="{{ form.name.id_for_label }}">{{ form.name.label }} <span class="req">*</span></label>
+            <input class="form-input {% if form.name.errors %}is-invalid{% endif %}"
+                   type="text" name="{{ form.name.html_name }}"
+                   id="{{ form.name.id_for_label }}"
+                   value="{{ form.name.value|default:'' }}"
+                   placeholder="Adınız Soyadınız"
+                   autocomplete="name" required>
+            {% if form.name.errors %}<div class="form-error">{{ form.name.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="{{ form.company.id_for_label }}">{{ form.company.label }}</label>
+            <input class="form-input" type="text" name="{{ form.company.html_name }}"
+                   id="{{ form.company.id_for_label }}"
+                   value="{{ form.company.value|default:'' }}"
+                   placeholder="Şirket adı" autocomplete="organization">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="{{ form.phone.id_for_label }}">{{ form.phone.label }} <span class="req">*</span></label>
+            <input class="form-input {% if form.phone.errors %}is-invalid{% endif %}"
+                   type="tel" name="{{ form.phone.html_name }}"
+                   id="{{ form.phone.id_for_label }}"
+                   value="{{ form.phone.value|default:'' }}"
+                   placeholder="05XX XXX XX XX"
+                   autocomplete="tel" required>
+            {% if form.phone.errors %}<div class="form-error">{{ form.phone.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }} <span class="req">*</span></label>
+            <input class="form-input {% if form.email.errors %}is-invalid{% endif %}"
+                   type="email" name="{{ form.email.html_name }}"
+                   id="{{ form.email.id_for_label }}"
+                   value="{{ form.email.value|default:'' }}"
+                   placeholder="ornek@sirket.com"
+                   autocomplete="email" required>
+            {% if form.email.errors %}<div class="form-error">{{ form.email.errors.0 }}</div>{% endif %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="{{ form.subject.id_for_label }}">{{ form.subject.label }} <span class="req">*</span></label>
+          <select class="form-select {% if form.subject.errors %}is-invalid{% endif %}"
+                  name="{{ form.subject.html_name }}"
+                  id="{{ form.subject.id_for_label }}" required>
+            <option value="" disabled {% if not form.subject.value %}selected{% endif %}>Seçiniz…</option>
+            {% for val, label in form.subject.field.choices %}
+            <option value="{{ val }}" {% if form.subject.value == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">{{ form.products_of_interest.label }}</label>
+          <div class="checkbox-grid">
+            {% for choice in form.products_of_interest %}
+            <label class="check-item">
+              {{ choice.tag }}
+              <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="{{ form.message.id_for_label }}">{{ form.message.label }} <span class="req">*</span></label>
+          <textarea class="form-textarea {% if form.message.errors %}is-invalid{% endif %}"
+                    name="{{ form.message.html_name }}"
+                    id="{{ form.message.id_for_label }}"
+                    rows="5"
+                    placeholder="Talebinizi detaylı açıklayınız..."
+                    required>{{ form.message.value|default:'' }}</textarea>
+          {% if form.message.errors %}<div class="form-error">{{ form.message.errors.0 }}</div>{% endif %}
+        </div>
+
+        <div class="kvkk-check">
+          <input type="checkbox" id="{{ form.kvkk.id_for_label }}"
+                 name="{{ form.kvkk.html_name }}" required
+                 {% if form.kvkk.value %}checked{% endif %}>
+          <label for="{{ form.kvkk.id_for_label }}">
+            <a href="/kvkk/" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum ve
+            kişisel verilerimin işlenmesine onay veriyorum. <span class="req">*</span>
+          </label>
+        </div>
+        {% if form.kvkk.errors %}<div class="form-error" style="margin-top:-.5rem;margin-bottom:1rem;">{{ form.kvkk.errors.0 }}</div>{% endif %}
+
+        <button type="submit" class="btn-submit">📋 Talebi Gönder</button>
+      </form>
+    </div>
+  </div>
+
+  {# SAĞ PANEL #}
+  <aside class="contact-side" aria-label="İletişim bilgileri">
+    <div class="info-card" itemscope itemtype="https://schema.org/LocalBusiness">
+      <div class="info-card-head">📋 İletişim Bilgileri</div>
+      <div class="info-card-body">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-text"><h4>Adres</h4><p itemprop="address">{{ CONTACT_ADDRESS }}</p></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div class="info-text"><h4>Telefon</h4><a href="tel:+90{{ CONTACT_PHONE|cut:' '|cut:'-' }}" itemprop="telephone">{{ CONTACT_PHONE }}</a></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">✉️</div>
+          <div class="info-text"><h4>E-posta</h4><a href="mailto:{{ CONTACT_EMAIL }}" itemprop="email">{{ CONTACT_EMAIL }}</a></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">💬</div>
+          <div class="info-text"><h4>WhatsApp</h4><a href="https://wa.me/{{ CONTACT_WHATSAPP }}" target="_blank" rel="noopener noreferrer">Mesaj Gönder</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-head">⏰ Çalışma Saatleri</div>
+      <div class="info-card-body" style="padding:1rem 1.5rem;">
+        <table class="hours-table">
+          <tbody>
+            <tr><td>Pazartesi – Cuma</td><td>08:00 – 18:00</td></tr>
+            <tr><td>Cumartesi</td><td>09:00 – 13:00</td></tr>
+            <tr><td>Pazar</td><td>Kapalı</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3180.1326776570663!2d30.046885176118813!3d39.90606127152627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cbf1be38a8169f%3A0xc2324b0170116022!2zU2FmZXBhY2vEsHNnIMSwxZ8gR8O8dmVubGnEn2kgdmUgQW1iYWxhaiBNYWx6ZW1lbGVyaQ!5e1!3m2!1str!2str!4v1772440853504!5m2!1str!2str"
+        title="SafePackISG konum haritası"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
+      </iframe>
+      <div class="map-footer">
+        <div class="map-label">SafePackISG <small>Bozüyük, Bilecik</small></div>
+        <a href="https://maps.app.goo.gl/xrPxgWXQ3hN6Vrcd7" target="_blank" rel="noopener noreferrer" class="btn-yol">🗺️ Yol Tarifi</a>
+      </div>
+    </div>
+  </aside>
+</div>
+{% endblock %}

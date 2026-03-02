@@ -1,0 +1,22 @@
+SafePackISG — Yeni İletişim Talebi
+====================================
+
+Tarih: {{ msg.created_at|date:"d.m.Y H:i" }}
+Durum: YENİ
+
+─── Gönderen Bilgileri ───────────────
+Ad Soyad : {{ msg.name }}
+Şirket   : {{ msg.company|default:"Belirtilmedi" }}
+Telefon  : {{ msg.phone }}
+E-posta  : {{ msg.email }}
+
+─── Talep Detayları ──────────────────
+Konu     : {{ msg.get_subject_display }}
+Ürünler  : {{ msg.products_of_interest|join:", "|default:"Belirtilmedi" }}
+
+─── Mesaj ────────────────────────────
+{{ msg.message }}
+
+─────────────────────────────────────
+Bu mesajı SafePackISG admin panelinden görüntüleyebilirsiniz.
+Admin Panel: https://www.safepackisg.com/admin/contact/contactmessage/

@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://www.safepackisg.com/#organization",
+  "name": "SafePackISG",
+  "url": "https://www.safepackisg.com",
+  "telephone": "+90-5xx-xxx-xxxx",
+  "email": "info@safepackisg.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Bozüyük",
+    "addressLocality": "Bilecik",
+    "addressCountry": "TR"
+  },
+  "openingHoursSpecification": [
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"13:00"}
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{# ── HERO SLIDER ── #}
+<section class="hero" id="slider" aria-label="Öne çıkan duyurular" aria-roledescription="karusel">
+  {% for slide in sliders %}
+  <div class="slide {% if forloop.first %}active{% endif %}"
+       role="group" aria-roledescription="slayt"
+       aria-label="Slayt {{ forloop.counter }} / {{ sliders|length }}"
+       {% if slide.background_image %}style="--slide-bg: url('{{ slide.background_image.url }}')"{% elif slide.background_color %}style="--slide-bg: none;"{% endif %}>
+    <div class="slide-bg"
+         {% if slide.background_image %}style="background-image: url('{{ slide.background_image.url }}')"
+         {% elif slide.background_color %}style="background: {{ slide.background_color }}"
+         {% endif %}>
+    </div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      {% if slide.tag %}<div class="slide-tag">{{ slide.tag }}</div>{% endif %}
+      <h1>{{ slide.title }}</h1>
+      {% if slide.description %}<p>{{ slide.description }}</p>{% endif %}
+      <div class="slide-btns">
+        {% if slide.primary_btn_text %}
+        <a href="{{ slide.primary_btn_url }}" class="btn-hero-primary">{{ slide.primary_btn_text }}</a>
+        {% endif %}
+        {% if slide.secondary_btn_text %}
+        <a href="{{ slide.secondary_btn_url }}" class="btn-hero-secondary">{{ slide.secondary_btn_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  {# Slider içeriği yoksa varsayılan #}
+  <div class="slide active">
+    <div class="slide-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">✅ CE Sertifikalı Ürünler</div>
+      <h1>İş Güvenliğinde<br><strong>Güvenilir</strong><br>Adresiniz</h1>
+      <p>Kişisel koruyucu donanımdan ambalaj malzemelerine, tüm iş güvenliği ihtiyaçlarınız için yanınızdayız.</p>
+      <div class="slide-btns">
+        <a href="{% url 'products:list' %}" class="btn-hero-primary">Ürünleri İncele</a>
+        <a href="{% url 'contact:contact' %}" class="btn-hero-secondary">Teklif Al</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  <button class="sarrow prev" onclick="prevSlide()" aria-label="Önceki slayt">&#8592;</button>
+  <button class="sarrow next" onclick="nextSlide()" aria-label="Sonraki slayt">&#8594;</button>
+  <div class="slider-controls" role="tablist" aria-label="Slayt seçimi">
+    {% for slide in sliders %}
+    <div class="sdot {% if forloop.first %}active{% endif %}"
+         onclick="goToSlide({{ forloop.counter0 }})"
+         role="tab"
+         aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+         aria-label="Slayt {{ forloop.counter }}"
+         tabindex="0">
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{# ── GÜVEN BANDI ── #}
+<div class="guven-bandi" role="list" aria-label="Güven unsurları">
+  <div class="guven-item" role="listitem"><span class="gi-icon">✅</span> CE Belgeli Ürünler</div>
+  <div class="guven-item" role="listitem"><span class="gi-icon">🛡️</span> EN &amp; TS Standartları</div>
+  <div class="guven-item" role="listitem"><span class="gi-icon">📋</span> ISG Danışmanlığı</div>
+  <div class="guven-item" role="listitem"><span class="gi-icon">💼</span> Kurumsal Çözümler</div>
+</div>
+
+{# ── KATEGORİLER ── #}
+<section class="section" id="kategoriler" aria-labelledby="kat-baslik">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Ürün Gamı</div>
+      <h2 id="kat-baslik">Tüm Kategoriler</h2>
+      <p>İş güvenliğinden ambalaja kadar her ihtiyacınız için kapsamlı çözümler sunuyoruz.</p>
+    </div>
+    <nav aria-label="Ürün kategorileri">
+      <div class="kat-grid">
+        {% for cat in categories %}
+        <a href="{{ cat.get_absolute_url }}" class="kat-kart" aria-label="{{ cat.name }} kategorisine git">
+          <div class="kat-icon-wrap" aria-hidden="true">{{ cat.icon }}</div>
+          <h3>{{ cat.name }}</h3>
+        </a>
+        {% endfor %}
+      </div>
+    </nav>
+  </div>
+</section>
+
+{# ── ÖNE ÇIKAN ÜRÜNLER ── #}
+{% if featured_products %}
+<section class="section bg-gri" aria-labelledby="urun-baslik">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Öne Çıkanlar</div>
+      <h2 id="urun-baslik">Popüler Ürünler</h2>
+      <p>En çok tercih edilen iş güvenliği ekipmanlarımızı keşfedin.</p>
+    </div>
+    <div class="urun-grid" role="list">
+      {% for product in featured_products %}
+      <article class="urun-kart" role="listitem" itemscope itemtype="https://schema.org/Product">
+        <a href="{{ product.get_absolute_url }}" aria-label="{{ product.name }} ürün detayı">
+          <div class="urun-gorsel" aria-hidden="true">
+            {% if product.thumbnail %}
+              <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" loading="lazy">
+            {% else %}
+              {{ product.category.icon }}
+            {% endif %}
+            {% if product.badge %}
+            <div class="urun-etiket etiket-{{ product.badge }}">{{ product.get_badge_display }}</div>
+            {% endif %}
+          </div>
+          <div class="urun-bilgi">
+            <div class="urun-kat" itemprop="category">{{ product.category.name }}</div>
+            <h3 itemprop="name">{{ product.name }}</h3>
+            <p itemprop="description">{{ product.short_description }}</p>
+            <span class="urun-detay">Detayları Gör →</span>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="{% url 'products:list' %}" class="urun-detay" style="display:inline-flex;">Tüm Ürünleri Gör →</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ── MARKALAR ── #}
+{% if footer_brands %}
+<section class="section bg-gri" aria-labelledby="marka-baslik">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">İş Ortaklarımız</div>
+      <h2 id="marka-baslik">Temsil Ettiğimiz Markalar</h2>
+    </div>
+    <div class="markalar" role="list" aria-label="Temsil edilen markalar">
+      {% for brand in footer_brands %}
+      <div class="marka-chip" role="listitem">
+        {% if brand.logo %}
+          <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" height="28">
+        {% else %}
+          {{ brand.name }}
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ── CTA ── #}
+<section class="cta-section" id="iletisim" aria-labelledby="cta-baslik">
+  <h2 id="cta-baslik">Kurumsal Teklif Almak İster misiniz?</h2>
+  <p>Toplu alımlarda özel fiyat ve ISG danışmanlık hizmetimizden yararlanın.</p>
+  <div class="cta-btns">
+    <a href="tel:+90{{ CONTACT_PHONE|cut:' '|cut:'-' }}" class="btn-white">📞 {{ CONTACT_PHONE }}</a>
+    <a href="mailto:{{ CONTACT_EMAIL }}" class="btn-outline-white">✉ E-posta Gönder</a>
+    <a href="https://wa.me/{{ CONTACT_WHATSAPP }}" class="btn-outline-white" rel="noopener" target="_blank">💬 WhatsApp</a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Slider JS — main.js içine taşınabilir
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.sdot');
+  let timer;
+
+  function goToSlide(n) {
+    slides[cur].classList.remove('active');
+    dots[cur]?.classList.remove('active');
+    dots[cur]?.setAttribute('aria-selected', 'false');
+    cur = n;
+    slides[cur].classList.add('active');
+    dots[cur]?.classList.add('active');
+    dots[cur]?.setAttribute('aria-selected', 'true');
+    resetTimer();
+  }
+  function nextSlide() { if (slides.length > 1) goToSlide((cur + 1) % slides.length); }
+  function prevSlide() { if (slides.length > 1) goToSlide((cur - 1 + slides.length) % slides.length); }
+  function resetTimer() { clearInterval(timer); if (slides.length > 1) timer = setInterval(nextSlide, 5500); }
+  resetTimer();
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+</script>
+{% endblock %}

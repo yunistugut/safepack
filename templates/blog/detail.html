@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block og_type %}article{% endblock %}
+{% block og_image %}{% if post.thumbnail %}{{ post.thumbnail.url }}{% else %}{% static 'img/og-image.jpg' %}{% endif %}{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.title|escapejs }}",
+  "description": "{{ post.excerpt|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}",
+  {% if post.thumbnail %}"image": "{{ request.scheme }}://{{ request.get_host }}{{ post.thumbnail.url }}",{% endif %}
+  {% if post.published_at %}"datePublished": "{{ post.published_at|date:'c' }}",{% endif %}
+  "dateModified": "{{ post.updated_at|date:'c' }}",
+  "author": {"@type": "Organization", "name": "SafePackISG"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "SafePackISG",
+    "logo": {"@type": "ImageObject", "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/safepackisg-logo.png' %}"}
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="breadcrumb-bar">
+  <nav class="breadcrumb container" aria-label="Sayfa yolu">
+    <a href="{% url 'core:home' %}">Anasayfa</a><span class="sep">›</span>
+    <a href="{% url 'blog:list' %}">Blog</a><span class="sep">›</span>
+    {% if post.category %}<a href="{{ post.category.get_absolute_url }}">{{ post.category.name }}</a><span class="sep">›</span>{% endif %}
+    <span class="current" aria-current="page">{{ post.title|truncatechars:40 }}</span>
+  </nav>
+</div>
+
+<div class="blog-body">
+  <article itemscope itemtype="https://schema.org/BlogPosting">
+    {# BAŞLIK #}
+    <header style="margin-bottom:2rem;">
+      {% if post.category %}
+      <a href="{{ post.category.get_absolute_url }}" class="post-tag" itemprop="articleSection" style="display:inline-block;margin-bottom:.8rem;">{{ post.category.name }}</a>
+      {% endif %}
+      <h1 itemprop="headline" style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--koyu);line-height:1.2;margin-bottom:1rem;">
+        {{ post.title }}
+      </h1>
+      <div class="post-meta" style="margin-bottom:1.5rem;">
+        {% if post.published_at %}
+        <span>📅 <time itemprop="datePublished" datetime="{{ post.published_at|date:'Y-m-d' }}">{{ post.published_at|date:"d F Y" }}</time></span>
+        {% endif %}
+        <span>⏱ {{ post.read_time }} dk okuma</span>
+        {% if post.author %}<span>✍ {{ post.author.get_full_name|default:post.author.username }}</span>{% endif %}
+      </div>
+      {% if post.thumbnail %}
+      <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}"
+           itemprop="image"
+           style="width:100%;height:320px;object-fit:cover;border-radius:16px;margin-bottom:2rem;">
+      {% endif %}
+    </header>
+
+    {# İÇERİK #}
+    <div class="blog-content" itemprop="articleBody">
+      {{ post.content|safe }}
+    </div>
+
+    {# PAYLAŞIM #}
+    <div style="border-top:1.5px solid var(--gri2);margin-top:2.5rem;padding-top:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span style="font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;color:var(--metin-acik);">PAYLAŞ:</span>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"
+         target="_blank" rel="noopener" style="padding:.4rem .9rem;background:#0A66C2;color:#fff;border-radius:7px;font-size:.8rem;font-weight:700;text-decoration:none;">LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ post.title|urlencode }}"
+         target="_blank" rel="noopener" style="padding:.4rem .9rem;background:#1DA1F2;color:#fff;border-radius:7px;font-size:.8rem;font-weight:700;text-decoration:none;">Twitter/X</a>
+      <a href="https://wa.me/?text={{ post.title|urlencode }}+{{ request.build_absolute_uri|urlencode }}"
+         target="_blank" rel="noopener" style="padding:.4rem .9rem;background:#25D366;color:#fff;border-radius:7px;font-size:.8rem;font-weight:700;text-decoration:none;">WhatsApp</a>
+    </div>
+  </article>
+
+  {# SIDEBAR #}
+  <aside class="blog-sidebar" aria-label="Blog yan panel">
+    <div class="s-card" style="background:var(--mavi);border-color:var(--mavi);">
+      <div class="s-card-body" style="padding:1.5rem;">
+        <h3 style="font-family:'Nunito',sans-serif;font-weight:900;color:#fff;margin-bottom:.6rem;">Teklif Alın</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.8);margin-bottom:1rem;line-height:1.6;">CE belgeli ekipmanlar için fiyat teklifi almak ister misiniz?</p>
+        <a href="{% url 'contact:contact' %}" style="display:block;background:var(--turuncu);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.7rem;border-radius:9px;text-align:center;text-decoration:none;">
+          📋 Teklif İste
+        </a>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-card-head">📚 Son Yazılar</div>
+      <div class="s-card-body">
+        <div class="popular-list">
+          {% for p in recent %}
+          <a href="{{ p.get_absolute_url }}" class="popular-item">
+            <div class="popular-num">0{{ forloop.counter }}</div>
+            <div>
+              <div class="popular-title">{{ p.title|truncatechars:50 }}</div>
+              {% if p.published_at %}<div class="popular-date">{{ p.published_at|date:"d M Y" }}</div>{% endif %}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-card-head">🗂 Kategoriler</div>
+      <div class="s-card-body">
+        <div class="kat-list">
+          {% for cat in categories %}
+          <a href="{{ cat.get_absolute_url }}">{{ cat.name }} <span class="kc">{{ cat.post_count }}</span></a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+{% if recent %}
+<section style="background:var(--gri);padding:3rem 2rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h2 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;color:var(--mavi);margin-bottom:2rem;">Diğer Yazılar</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;">
+      {% for p in recent %}
+      <a href="{{ p.get_absolute_url }}" class="r-kart">
+        <div class="r-gorsel">{% if p.thumbnail %}<img src="{{ p.thumbnail.url }}" alt="{{ p.title }}" style="width:100%;height:100%;object-fit:cover;">{% else %}📰{% endif %}</div>
+        <div class="r-bilgi">
+          {% if p.category %}<div class="r-kat">{{ p.category.name }}</div>{% endif %}
+          <h3>{{ p.title|truncatechars:60 }}</h3>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

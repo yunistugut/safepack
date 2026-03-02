@@ -1,0 +1,1014 @@
+[
+  {
+    "model": "products.certificate",
+    "pk": 1,
+    "fields": {
+      "name": "CE Belgeli",
+      "code": "CE",
+      "description": "Avrupa Birligi uygunluk isareti."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 2,
+    "fields": {
+      "name": "EN 388 - Mekanik Riskler",
+      "code": "EN 388",
+      "description": "Is eldivenlerinde kesme, yirtilma ve asinmaya karsi direnc standarti."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 3,
+    "fields": {
+      "name": "EN 397 - Endustriyel Baretler",
+      "code": "EN 397",
+      "description": "Endustriyel koruyucu basliklar icin Avrupa standarti."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 4,
+    "fields": {
+      "name": "EN ISO 20345 - Emniyet Ayakkabisi",
+      "code": "EN ISO 20345",
+      "description": "Celik burunlu is ayakkabilari ve botlari icin uluslararasi standart."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 5,
+    "fields": {
+      "name": "TS EN 3 - Yangin Tupu",
+      "code": "TS EN 3",
+      "description": "Tasinabilir yangin sonduruculer icin Turk ve Avrupa standarti."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 6,
+    "fields": {
+      "name": "EN 149 - FFP Maskeler",
+      "code": "EN 149",
+      "description": "Filtreleyici yarim maskeler. FFP1, FFP2, FFP3 siniflandirmasi."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 7,
+    "fields": {
+      "name": "EN 166 - Goz Korumasi",
+      "code": "EN 166",
+      "description": "Bireysel goz korumasi icin genel sartlar standarti."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 8,
+    "fields": {
+      "name": "EN ISO 20471 - Reflektif",
+      "code": "EN ISO 20471",
+      "description": "Yuksek gorunurluklu uyari giysileri icin uluslararasi standart."
+    }
+  },
+  {
+    "model": "products.certificate",
+    "pk": 9,
+    "fields": {
+      "name": "TSE Onayli",
+      "code": "TSE",
+      "description": "Turk Standartlari Enstitusu uygunluk belgesi."
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 1,
+    "fields": {
+      "name": "3M",
+      "slug": "3m",
+      "logo": "",
+      "website": "https://www.3m.com.tr",
+      "is_active": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 2,
+    "fields": {
+      "name": "Honeywell",
+      "slug": "honeywell",
+      "logo": "",
+      "website": "https://www.honeywell.com",
+      "is_active": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 3,
+    "fields": {
+      "name": "MSA Safety",
+      "slug": "msa-safety",
+      "logo": "",
+      "website": "https://www.msasafety.com",
+      "is_active": true,
+      "order": 3
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 4,
+    "fields": {
+      "name": "Ansell",
+      "slug": "ansell",
+      "logo": "",
+      "website": "https://www.ansell.com",
+      "is_active": true,
+      "order": 4
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 5,
+    "fields": {
+      "name": "Uvex",
+      "slug": "uvex",
+      "logo": "",
+      "website": "https://www.uvex.com.tr",
+      "is_active": true,
+      "order": 5
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 6,
+    "fields": {
+      "name": "Portwest",
+      "slug": "portwest",
+      "logo": "",
+      "website": "https://www.portwest.com",
+      "is_active": true,
+      "order": 6
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 7,
+    "fields": {
+      "name": "Deltaplus",
+      "slug": "deltaplus",
+      "logo": "",
+      "website": "https://www.deltaplus.eu",
+      "is_active": true,
+      "order": 7
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 8,
+    "fields": {
+      "name": "SafePackISG",
+      "slug": "safepackisg",
+      "logo": "",
+      "website": "https://www.safepackisg.com",
+      "is_active": true,
+      "order": 8
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+      "name": "İş Eldivenleri",
+      "slug": "is-eldivenleri",
+      "icon": "🧤",
+      "description": "CE belgeli nitril, deri, lateks ve kimyasal dirençli iş eldivenleri.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 1,
+      "meta_title": "İş Eldivenleri | SafePackISG",
+      "meta_description": "CE belgeli iş eldivenleri. EN 388 standartlı nitril, deri ve kimyasal dirençli eldivenler."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "name": "Baretler & Başlıklar",
+      "slug": "baretler",
+      "icon": "⛑️",
+      "description": "EN 397 standartlı polietilen ve ABS baretler.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 2,
+      "meta_title": "Baretler | SafePackISG",
+      "meta_description": "EN 397 standartlı CE belgeli iş baretleri."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "name": "İş Ayakkabıları",
+      "slug": "is-ayakkabilari",
+      "icon": "👟",
+      "description": "S1, S2, S3 sınıfı çelik burunlu iş ayakkabıları ve botlar.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 3,
+      "meta_title": "İş Ayakkabıları | SafePackISG",
+      "meta_description": "EN ISO 20345 standartlı çelik burunlu iş ayakkabıları."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "name": "Yangın Güvenliği",
+      "slug": "yangin-guvenligi",
+      "icon": "🔥",
+      "description": "Yangın tüpleri, yangın battaniyeleri ve duman detektörleri.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 4,
+      "meta_title": "Yangın Güvenliği Ekipmanları | SafePackISG",
+      "meta_description": "TS EN 3 standartlı yangın tüpleri ve yangın güvenliği ekipmanları."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "name": "Solunum Ekipmanları",
+      "slug": "solunum-ekipmanlari",
+      "icon": "😷",
+      "description": "FFP1, FFP2, FFP3 toz maskeleri ve solunum cihazları.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 5,
+      "meta_title": "Solunum Ekipmanları | SafePackISG",
+      "meta_description": "EN 149 standartlı FFP2, FFP3 toz maskeleri."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "name": "Reflektif Giysiler",
+      "slug": "reflektif-giysiler",
+      "icon": "🦺",
+      "description": "EN ISO 20471 standartlı yüksek görünürlüklü yelekler ve ceketler.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 6,
+      "meta_title": "Reflektif Giysiler | SafePackISG",
+      "meta_description": "EN ISO 20471 yüksek görünürlüklü güvenlik yelekleri."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "name": "Göz & Yüz Koruması",
+      "slug": "goz-yuz-koruma",
+      "icon": "🥽",
+      "description": "Polikarbonat gözlükler, yüz siperleri ve kaynak maskeleri.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 7,
+      "meta_title": "Göz ve Yüz Koruması | SafePackISG",
+      "meta_description": "EN 166 standartlı koruyucu gözlükler."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "name": "Ambalaj Malzemeleri",
+      "slug": "ambalaj-malzemeleri",
+      "icon": "📦",
+      "description": "Streç film, koli bandı, köpük malzeme ve palet çemberi.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 8,
+      "meta_title": "Ambalaj Malzemeleri | SafePackISG",
+      "meta_description": "Endüstriyel streç film, koli bandı ve ambalaj malzemeleri."
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+      "name": "İlk Yardım",
+      "slug": "ilk-yardim",
+      "icon": "🩺",
+      "description": "TSE onaylı işyeri ilk yardım çantaları ve sedyeler.",
+      "image": "",
+      "parent": null,
+      "is_active": true,
+      "order": 9,
+      "meta_title": "İlk Yardım Malzemeleri | SafePackISG",
+      "meta_description": "TS 13347 standartlı işyeri ilk yardım çantaları."
+    }
+  },
+  {
+    "model": "products.product",
+    
+    "pk": 1,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Nitril Kaplı İş Eldiveni",
+      "slug": "nitril-kapli-is-eldiveni",
+      "category": 1,
+      "brand": 1,
+      "badge": "populer",
+      "thumbnail": "",
+      "short_description": "Anti-slip nitril kaplama, optimum turuş kabiliyeti, hassas çalışma için ideal. 8 beden seçeneği.",
+      "description": "<p>Nitril Kaplı İş Eldiveni, hafif ve dayanıklı yapısıyla genel endüstriyel kullanım için idealdir.</p><ul><li>Anti-slip nitril kaplama</li><li>Nefes alabilen naylon astar</li><li>8 farklı beden</li></ul>",
+      "usage_areas": "<ul><li>Genel sanayi</li><li>Depo ve lojistik</li><li>Montaj hatları</li><li>İnşaat</li></ul>",
+      "care_instructions": "<ul><li>30°C'de yıkanabilir</li><li>Serin ve kuru yerde saklayın</li></ul>",
+      "specifications": {
+        "Standart": "EN 388:2016",
+        "Kaplama": "Nitril",
+        "Astar": "Naylon",
+        "Beden": "6-11",
+        "Renk": "Gri/Siyah"
+      },
+      "certificates": [
+        1,
+        2
+      ],
+      "related_products": [
+        2,
+        3
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "Nitril Kaplı İş Eldiveni EN 388 | SafePackISG",
+      "meta_description": "Anti-slip nitril kaplı iş eldiveni. EN 388 belgeli."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Deri İş Eldiveni",
+      "slug": "deri-is-eldiveni",
+      "category": 1,
+      "brand": 4,
+      "badge": "",
+      "thumbnail": "",
+      "short_description": "Tam deri, yüksek mekanik direnç, kaynak ve metal işleri için uygun. Termal koruma özellikli.",
+      "description": "<p>Tam deri iş eldiveni, ağır sanayi ve kaynak işlemleri için yüksek mekanik koruma sağlar.</p>",
+      "usage_areas": "<ul><li>Kaynak işlemleri</li><li>Metal sanayi</li><li>Ağır sanayi</li></ul>",
+      "care_instructions": "<ul><li>Elle yıkayın</li><li>Doğrudan güneş ışığından uzak tutun</li></ul>",
+      "specifications": {
+        "Standart": "EN 388:2016",
+        "Malzeme": "Sığır Derisi",
+        "Beden": "8-11",
+        "Renk": "Kahverengi"
+      },
+      "certificates": [
+        1,
+        2
+      ],
+      "related_products": [
+        1,
+        3
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Kimyasal Dirençli Eldiven",
+      "slug": "kimyasal-direngli-eldiven",
+      "category": 1,
+      "brand": 4,
+      "badge": "ce",
+      "thumbnail": "",
+      "short_description": "Yüksek kimyasal direnç, uzun boylu bileklik, asit ve solvent koruması için özel formül.",
+      "description": "<p>Kimyasal dirençli eldivenler, tehlikeli kimyasallarla çalışan personel için üst düzey koruma sağlar.</p>",
+      "usage_areas": "<ul><li>Kimya sanayi</li><li>Laboratuvar</li><li>Temizlik sektörü</li></ul>",
+      "care_instructions": "<ul><li>Kullanım sonrası yıkayın</li></ul>",
+      "specifications": {
+        "Standart": "EN 374",
+        "Malzeme": "Nitril",
+        "Uzunluk": "33 cm",
+        "Kalınlık": "0.4 mm"
+      },
+      "certificates": [
+        1,
+        2
+      ],
+      "related_products": [
+        1
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Polietilen Baret EN 397",
+      "slug": "polietilen-baret-en397",
+      "category": 2,
+      "brand": 3,
+      "badge": "populer",
+      "thumbnail": "",
+      "short_description": "6 nokta askı sistemi, yüksek darbe dayanımı, ayarlanabilir ratchet mekanizması. 5 renk seçeneği.",
+      "description": "<p>Yüksek yoğunluklu polietilen (HDPE) malzemeden üretilen baret, mükemmel darbe emme özelliği sunar.</p>",
+      "usage_areas": "<ul><li>İnşaat</li><li>Ağır sanayi</li><li>Maden</li><li>Enerji tesisleri</li></ul>",
+      "care_instructions": "<ul><li>Sabunlu su ile temizleyin</li><li>5 yıl kullanım ömrü</li></ul>",
+      "specifications": {
+        "Standart": "EN 397:2012+A1:2012",
+        "Materyal": "HDPE",
+        "Kafa Çevresi": "53-63 cm",
+        "Ağırlık": "≈370 g",
+        "Renk": "5 seçenek"
+      },
+      "certificates": [
+        1,
+        3,
+        9
+      ],
+      "related_products": [
+        5,
+        7
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "Polietilen Baret EN 397 | SafePackISG",
+      "meta_description": "EN 397 standartlı CE belgeli polietilen baret. 5 renk seçeneği."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Ventilasyonlu ABS Baret",
+      "slug": "ventilasyonlu-abs-baret",
+      "category": 2,
+      "brand": 2,
+      "badge": "yeni",
+      "thumbnail": "",
+      "short_description": "ABS malzeme, havalandırma delikleri, sıcak ortamlar için ideal. Güneş ışığına dayanıklı.",
+      "description": "<p>Ventilasyonlu ABS baret, yüksek ısılı çalışma ortamlarında termal konforu artıran havalandırma sistemiyle öne çıkar.</p>",
+      "usage_areas": "<ul><li>Açık alan çalışmaları</li><li>Sıcak iklim şantiyeler</li></ul>",
+      "care_instructions": "<ul><li>Sabunlu su ile temizleyin</li></ul>",
+      "specifications": {
+        "Standart": "EN 397",
+        "Materyal": "ABS",
+        "Havalandırma": "Var",
+        "Ağırlık": "≈340 g"
+      },
+      "certificates": [
+        1,
+        3
+      ],
+      "related_products": [
+        4
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "S3 Çelik Burunlu İş Botu",
+      "slug": "s3-celik-burunlu-is-botu",
+      "category": 3,
+      "brand": 6,
+      "badge": "yeni",
+      "thumbnail": "",
+      "short_description": "S3 sınıfı, çelik burun ve çelik taban, su geçirmez deri üst, anti-statik taban. Yüksek konfor.",
+      "description": "<p>S3 sınıfı iş botu, inşaat ve ağır sanayi ortamlarında üst düzey koruma sağlar.</p>",
+      "usage_areas": "<ul><li>İnşaat</li><li>Ağır sanayi</li><li>Lojistik</li><li>Depo</li></ul>",
+      "care_instructions": "<ul><li>Temiz kuru bezle silin</li><li>Deri bakım kremi uygulayın</li></ul>",
+      "specifications": {
+        "Standart": "EN ISO 20345",
+        "Sınıf": "S3",
+        "Burun": "Çelik 200J",
+        "Taban": "Poliuretan",
+        "Su Geçirmezlik": "Var"
+      },
+      "certificates": [
+        1,
+        4
+      ],
+      "related_products": [
+        7
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "S3 Çelik Burunlu İş Botu | SafePackISG",
+      "meta_description": "EN ISO 20345 S3 standartlı çelik burunlu iş botu."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "S1P Hafif İş Ayakkabısı",
+      "slug": "s1p-hafif-is-ayakkabisi",
+      "category": 3,
+      "brand": 6,
+      "badge": "",
+      "thumbnail": "",
+      "short_description": "S1P sınıfı, hafif kompozit burun, delinmeye karşı koruma, spor taban. Günlük kullanım için konforlu.",
+      "description": "<p>S1P hafif iş ayakkabısı, uzun mesafe yürüyüş ve günlük saha çalışmaları için optimize edilmiştir.</p>",
+      "usage_areas": "<ul><li>Saha çalışmaları</li><li>Servis ve bakım</li></ul>",
+      "care_instructions": "<ul><li>Islak bezle silin</li></ul>",
+      "specifications": {
+        "Standart": "EN ISO 20345",
+        "Sınıf": "S1P",
+        "Burun": "Kompozit",
+        "Ağırlık": "≈420 g/çift"
+      },
+      "certificates": [
+        1,
+        4
+      ],
+      "related_products": [
+        6
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "6 kg ABC Kuru Kimyevi Yangın Tübü",
+      "slug": "6kg-abc-yangin-tupu",
+      "category": 4,
+      "brand": 8,
+      "badge": "populer",
+      "thumbnail": "",
+      "short_description": "ABC sınıfı kuru kimyevi toz, 6 kg kapasite, manometre göstergeli, 5 yıl garanti.",
+      "description": "<p>ABC sınıfı yangın tübü katı (A), sıvı (B) ve gaz (C) yangınlarına karşı etkilidir.</p>",
+      "usage_areas": "<ul><li>Ofis ve iş yerleri</li><li>Fabrika ve depolar</li><li>Araçlar</li></ul>",
+      "care_instructions": "<ul><li>Yılda bir bakım yaptırın</li><li>12 yılda bir dolum zorunludur</li></ul>",
+      "specifications": {
+        "Standart": "TS EN 3",
+        "Kapasite": "6 kg",
+        "Sınıf": "ABC",
+        "Ajan": "Kuru Kimyevi Toz",
+        "Çalışma Basıncı": "15 bar"
+      },
+      "certificates": [
+        1,
+        5,
+        9
+      ],
+      "related_products": [
+        9
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "6 kg ABC Yangın Tübü | SafePackISG",
+      "meta_description": "TS EN 3 standartlı 6 kg ABC yangın tübü."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Yangın Battaniyesi 120x180 cm",
+      "slug": "yangin-battaniyesi",
+      "category": 4,
+      "brand": 8,
+      "badge": "",
+      "thumbnail": "",
+      "short_description": "Cam elyaf yangın battaniyesi, 120x180 cm, hızlı müdahale için duvara monte kutu ile.",
+      "description": "<p>Yangın battaniyesi, mutfak ve giysi yangınlarına ilk müdahalede güvenli bir çözüm sunar.</p>",
+      "usage_areas": "<ul><li>Mutfaklar</li><li>Laboratuvarlar</li></ul>",
+      "care_instructions": "<ul><li>Tek kullanımlıktır</li></ul>",
+      "specifications": {
+        "Boyut": "120x180 cm",
+        "Malzeme": "Cam Elyaf",
+        "Saklama Kutusu": "Dahil"
+      },
+      "certificates": [
+        1,
+        9
+      ],
+      "related_products": [
+        8
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "FFP2 Toz ve Sis Maskesi",
+      "slug": "ffp2-toz-maskesi",
+      "category": 5,
+      "brand": 1,
+      "badge": "ce",
+      "thumbnail": "",
+      "short_description": "%94 filtrasyon verimliliği, ayarlanabilir burun teli, yüksek konfor, tek kullanımlık.",
+      "description": "<p>FFP2 sınıfı toz maskesi, toz, sis ve aerosollere karşı yüksek koruma sağlar.</p>",
+      "usage_areas": "<ul><li>İnşaat ve yıkım</li><li>Ahşap işleme</li><li>Tarım</li></ul>",
+      "care_instructions": "<ul><li>Tek kullanımlıktır</li><li>Serin kuru yerde saklayın</li></ul>",
+      "specifications": {
+        "Standart": "EN 149:2001+A1:2009",
+        "Sınıf": "FFP2 NR",
+        "Filtrasyon": "≥94%",
+        "Kullanım": "Tek kullanımlık"
+      },
+      "certificates": [
+        1,
+        6
+      ],
+      "related_products": [
+        4
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "FFP2 Toz Maskesi | SafePackISG",
+      "meta_description": "EN 149 standartlı FFP2 toz maskesi."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Yüksek Görünürlüklü Güvenlik Yeleği",
+      "slug": "yuksek-gorunurluklu-guvenlik-yelegi",
+      "category": 6,
+      "brand": 6,
+      "badge": "populer",
+      "thumbnail": "",
+      "short_description": "EN ISO 20471 Sınıf 2, 360° reflektif şerit, sarı/turuncu, hafif polyester kumaş, XS-3XL.",
+      "description": "<p>Yüksek görünürlüкlü güvenlik yeleği, trafik ve düşük ışık koşullarında çalışan personelin görünürlüğünü artırır.</p>",
+      "usage_areas": "<ul><li>Yol ve trafik çalışmaları</li><li>İnşaat şantiyeler</li></ul>",
+      "care_instructions": "<ul><li>40°C'de yıkanabilir</li><li>Reflektif bant hasarını kontrol edin</li></ul>",
+      "specifications": {
+        "Standart": "EN ISO 20471",
+        "Sınıf": "2",
+        "Renk": "Sarı / Turuncu",
+        "Malzeme": "100% Polyester",
+        "Beden": "XS - 3XL"
+      },
+      "certificates": [
+        1,
+        8
+      ],
+      "related_products": [
+        4,
+        10
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "Reflektif Güvenlik Yeleği | SafePackISG",
+      "meta_description": "EN ISO 20471 Sınıf 2 yüksek görünürlüкlü güvenlik yeleği."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Polikarbonat Koruyucu Gözlük",
+      "slug": "polikarbonat-koruyucu-gozluk",
+      "category": 7,
+      "brand": 5,
+      "badge": "",
+      "thumbnail": "",
+      "short_description": "Çizilmez UV korumalı polikarbonat cam, anti-sis kaplama, ayarlanabilir sap.",
+      "description": "<p>Polikarbonat koruyucu gözlük, yüksek optik netlik ve dayanıklı yapısıyla endüstriyel kullanım için idealdir.</p>",
+      "usage_areas": "<ul><li>Talaşlı imalat</li><li>Kimyasal işlemler</li><li>Laboratuvar</li></ul>",
+      "care_instructions": "<ul><li>Yumuşak bezle silin</li></ul>",
+      "specifications": {
+        "Standart": "EN 166:2002",
+        "Cam": "Polikarbonat",
+        "UV Koruması": "%99.9",
+        "Anti-sis": "Var"
+      },
+      "certificates": [
+        1,
+        7
+      ],
+      "related_products": [
+        4
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Endüstriyel Streç Film",
+      "slug": "endustriyel-strec-film",
+      "category": 8,
+      "brand": 8,
+      "badge": "yeni",
+      "thumbnail": "",
+      "short_description": "17 mikron, 500m, manuel kullanım, şeffaf. Palet sarma ve ambalaj için yüksek esneklik.",
+      "description": "<p>Endüstriyel streç film, palet sabitleme ve ürün ambalajlama için optimize edilmiştir.</p>",
+      "usage_areas": "<ul><li>Palet sarma</li><li>Depo ambalajlama</li></ul>",
+      "care_instructions": "<ul><li>Kuru ve serin depoda saklayın</li></ul>",
+      "specifications": {
+        "Kalınlık": "17 mikron",
+        "Uzunluk": "500 m",
+        "En": "50 cm",
+        "Renk": "Şeffaf",
+        "Tip": "Manuel"
+      },
+      "certificates": [],
+      "related_products": [
+        14
+      ],
+      "is_active": true,
+      "is_featured": true,
+      "meta_title": "Endüstriyel Streç Film | SafePackISG",
+      "meta_description": "17 mikron 500m endüstriyel streç film."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "Kahverengi Koli Bandı 45mm",
+      "slug": "kahverengi-koli-bandi-45mm",
+      "category": 8,
+      "brand": 8,
+      "badge": "",
+      "thumbnail": "",
+      "short_description": "45mm x 100m, yüksek yapışkanlık, gürültüsüz açılım, nem ve sıcaklığa dayanıklı.",
+      "description": "<p>Yüksek yapışkanlıklı koli bandı, karton kutu ve ambalaj paketleme için idealdir.</p>",
+      "usage_areas": "<ul><li>Koli kapatma</li><li>Ambalaj bantlama</li></ul>",
+      "care_instructions": "<ul><li>Serin ve kuru ortamda saklayın</li></ul>",
+      "specifications": {
+        "En": "45 mm",
+        "Uzunluk": "100 m",
+        "Kalınlık": "45 mikron",
+        "Renk": "Kahverengi"
+      },
+      "certificates": [],
+      "related_products": [
+        13
+      ],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "name": "İşyeri İlk Yardım Çantası (50 Kişilik)",
+      "slug": "isyeri-ilk-yardim-cantasi-50-kisilik",
+      "category": 9,
+      "brand": 8,
+      "badge": "ce",
+      "thumbnail": "",
+      "short_description": "TSE onaylı, 50 kişilik işyeri standardı malzeme seti, suya dayanıklı çanta.",
+      "description": "<p>50 kişilik işyeri ilk yardım çantası, iş güvenliği mevzuatı kapsamında zorunlu malzemelerin tamamını içermektedir.</p>",
+      "usage_areas": "<ul><li>Fabrika ve atölyeler</li><li>İnşaat şantiyeler</li><li>Tüm işyerleri</li></ul>",
+      "care_instructions": "<ul><li>Son kullanma tarihlerini kontrol edin</li></ul>",
+      "specifications": {
+        "Standart": "TS 13347",
+        "Kapasite": "50 kişi",
+        "Çanta": "Suya dayanıklı naylon",
+        "İçerik": "Tam set"
+      },
+      "certificates": [
+        1,
+        9
+      ],
+      "related_products": [],
+      "is_active": true,
+      "is_featured": false,
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "products.slideritem",
+    "pk": 1,
+    "fields": {
+      "title": "İş Güvenliğinde Güvenilir Adresiniz",
+      "subtitle": "CE Sertifikalı Ürünler",
+      "tag": "✅ CE Sertifikalı Ürünler",
+      "description": "Kişisel koruyucu donanımdan ambalaj malzemelerine, tüm iş güvenliği ihtiyaçlarınız için yanınızdayız.",
+      "background_image": "",
+      "background_color": "linear-gradient(125deg, #0d2d5a 0%, #1B4F8A 50%, #2A6DB5 100%)",
+      "primary_btn_text": "Ürünleri İncele",
+      "primary_btn_url": "/urunler/",
+      "secondary_btn_text": "Teklif Al",
+      "secondary_btn_url": "/iletisim/",
+      "is_active": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "products.slideritem",
+    "pk": 2,
+    "fields": {
+      "title": "EN 397 Baretler Stokta Hazır",
+      "subtitle": "Hızlı Teslimat",
+      "tag": "⛑️ Baret Koleksiyonu",
+      "description": "Polietilen ve ABS baret modellerimiz, tüm beden ve renk seçenekleriyle stokta hazır.",
+      "background_image": "",
+      "background_color": "linear-gradient(125deg, #5a2d0d 0%, #8A4F1B 50%, #B56D2A 100%)",
+      "primary_btn_text": "Baretleri Gör",
+      "primary_btn_url": "/urunler/baretler/",
+      "secondary_btn_text": "Fiyat Al",
+      "secondary_btn_url": "/iletisim/",
+      "is_active": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "products.slideritem",
+    "pk": 3,
+    "fields": {
+      "title": "Ambalaj Malzemeleri Toplu Fiyatları",
+      "subtitle": "Stokta 200+ Ürün",
+      "tag": "📦 Ambalaj Çözümleri",
+      "description": "Streç film, koli bandı ve ambalaj ekipmanları. Kurumsal alımlarda özel fiyatlandırma.",
+      "background_image": "",
+      "background_color": "linear-gradient(125deg, #0a3d1a 0%, #1B6B35 50%, #2AB564 100%)",
+      "primary_btn_text": "Ambalaj Ürünleri",
+      "primary_btn_url": "/urunler/ambalaj-malzemeleri/",
+      "secondary_btn_text": "İletişime Geç",
+      "secondary_btn_url": "/iletisim/",
+      "is_active": true,
+      "order": 3
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 1,
+    "fields": {
+      "name": "KKD Rehberleri",
+      "slug": "kkd-rehberleri",
+      "order": 1
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Mevzuat",
+      "slug": "mevzuat",
+      "order": 2
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Yangın Güvenliği",
+      "slug": "yangin-guvenligi",
+      "order": 3
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Ambalaj",
+      "slug": "ambalaj",
+      "order": 4
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Sektör Haberleri",
+      "slug": "sektor-haberleri",
+      "order": 5
+    }
+  },
+  {
+    "model": "blog.blogpost",
+    "pk": 1,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "title": "Doğru İş Bareti Nasıl Seçilir? Kapsamlı Rehber",
+      "slug": "dogru-is-bareti-nasil-secilir",
+      "category": 1,
+      "author": null,
+      "excerpt": "EN 397 standardından malzeme seçimine kadar iş bareti seçiminde dikkat edilmesi gereken tüm kriterleri anlattık.",
+      "content": "<h2>İş Bareti Seçiminde Temel Kriterler</h2><p>Doğru baret seçimi, çalışanın hayatını korurken konfor ve verimlilik de sağlamalıdır.</p><h3>1. Standart Uyumluluğu</h3><p>Türkiye'de satışa sunulan tüm endüstriyel baretlerin EN 397:2012+A1:2012 standardına uygun ve CE işaretli olması zorunludur.</p><h3>2. Malzeme Seçimi</h3><p><strong>Polietilen (HDPE):</strong> En yaygın kullanılan malzemedir. Hafif, dayanıklı ve ekonomiktir.</p><p><strong>ABS:</strong> UV ışınlarına daha dirençlidir. Açık alan çalışmaları için tercih edilir.</p><h3>3. Askı Sistemi</h3><p>Kaliteli bir baret için 6 noktalı askı sistemi tercih edilmelidir.</p><blockquote>EN 397 standardına göre baretlerin üretim tarihinden itibaren maksimum 5 yıl kullanılması önerilmektedir.</blockquote>",
+      "thumbnail": "",
+      "status": "published",
+      "is_featured": true,
+      "read_time": 7,
+      "published_at": "2025-02-15T09:00:00+03:00",
+      "meta_title": "Doğru İş Bareti Nasıl Seçilir? | SafePackISG Blog",
+      "meta_description": "EN 397 standartlı iş bareti seçiminde dikkat edilmesi gereken 5 temel kriter."
+    }
+  },
+  {
+    "model": "blog.blogpost",
+    "pk": 2,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "title": "CE Belgesi Nedir? Sahte CE İşaretini Nasıl Anlarsınız?",
+      "slug": "ce-belgesi-nedir",
+      "category": 1,
+      "author": null,
+      "excerpt": "CE işaretinin hukuki anlamı, hangi ürünlerde zorunlu olduğu ve sahte CE işaretli ürünleri tespit etme yöntemleri.",
+      "content": "<h2>CE İşareti Nedir?</h2><p>CE işareti, bir ürünün Avrupa Birliği'nin güvenlik, sağlık ve çevre koruma direktiflerine uygun olduğunu gösteren bir uygunluk işaretidir.</p><h2>KKD Ürünlerinde CE Zorunluluğu</h2><p>6331 sayılı İş Sağlığı ve Güvenliği Kanunu kapsamında işverenler, çalışanlara CE işaretli KKD temin etmekle yükümlüдür.</p><h2>Sahte CE İşaretini Nasıl Anlarsınız?</h2><ul><li>Ürün üzerinde sadece CE harfleri, onaylanmış kuruluş numarası yok</li><li>Beraberinde DoC belgesi bulunmuyor</li><li>Fiyat piyasa ortalamasının çok altında</li></ul>",
+      "thumbnail": "",
+      "status": "published",
+      "is_featured": false,
+      "read_time": 4,
+      "published_at": "2025-01-15T09:00:00+03:00",
+      "meta_title": "",
+      "meta_description": ""
+    }
+  },
+  {
+    "model": "blog.blogpost",
+    "pk": 3,
+    "fields": {
+      "created_at": "2026-06-02T12:00:00Z",
+      "updated_at": "2026-06-02T12:00:00Z",
+      "title": "Yangın Tübü Dolum ve Bakım Sıklığı: Mevzuat Ne Diyor?",
+      "slug": "yangin-tupu-dolum-ve-bakim",
+      "category": 3,
+      "author": null,
+      "excerpt": "TS EN 3 standardı kapsamında yangın tübü periyodik kontrolü, dolum zorunlulukları ve belgelendirme gereklilikleri.",
+      "content": "<h2>Yasal Zorunluluklar</h2><p>Binaların Yangından Korunması Hakkında Yönetmelik (2007) kapsamında taşınabilir yangın söndürücülerin düzzenli bakımı zorunludur.</p><h2>Periyodik Bakım Sıklıkları</h2><p><strong>Yıllık bakım:</strong> Tüm yangın söndürücüler için zorunludur.</p><p><strong>5 yılda bir:</strong> İç muayene ve gerekirse dolum yenileme.</p><p><strong>12 yılda bir:</strong> Hidrostatik test ve zorunlu yenileme.</p>",
+      "thumbnail": "",
+      "status": "published",
+      "is_featured": false,
+      "read_time": 6,
+      "published_at": "2025-01-25T09:00:00+03:00",
+      "meta_title": "",
+      "meta_description": ""
+    }
+  }
+]

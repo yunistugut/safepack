@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Sayfa yolu">
+      <a href="{% url 'core:home' %}">Anasayfa</a><span>›</span>
+      <a href="{% url 'products:list' %}">Ürünler</a><span>›</span>
+      <span aria-current="page">{{ category.name }}</span>
+    </nav>
+    <h1>{{ category.icon }} {{ category.name }}</h1>
+    {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+  </div>
+</div>
+
+<div class="page-body">
+  {# SIDEBAR #}
+  <aside class="sidebar" aria-label="Kategoriler">
+    <div class="filter-card">
+      <div class="filter-card-head">🗂️ Tüm Kategoriler</div>
+      <div class="filter-body">
+        {% for cat in categories %}
+        <a href="{{ cat.get_absolute_url }}"
+           class="filter-item"
+           style="text-decoration:none;{% if cat.slug == category.slug %}font-weight:800;color:var(--mavi);{% endif %}">
+          <span>{{ cat.icon }} {{ cat.name }}</span>
+          <span class="filter-count">{{ cat.product_count }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+
+  {# ÜRÜNLER #}
+  <section aria-labelledby="cat-urunler">
+    <div class="products-topbar">
+      <div class="products-topbar-left">
+        <strong>{{ page_obj.paginator.count }}</strong> ürün — <em>{{ category.name }}</em>
+      </div>
+    </div>
+
+    {% if page_obj %}
+    <div class="urun-grid" role="list">
+      {% for product in page_obj %}
+      <article class="urun-kart" role="listitem" itemscope itemtype="https://schema.org/Product">
+        <a href="{{ product.get_absolute_url }}">
+          <div class="urun-gorsel" aria-hidden="true">
+            {% if product.thumbnail %}
+              <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" loading="lazy">
+            {% else %}
+              {{ product.category.icon }}
+            {% endif %}
+            {% if product.badge %}
+            <div class="urun-etiket etiket-{{ product.badge }}">{{ product.get_badge_display }}</div>
+            {% endif %}
+          </div>
+          <div class="urun-bilgi">
+            <div class="urun-kat" itemprop="category">{{ product.category.name }}</div>
+            <h2 itemprop="name">{{ product.name }}</h2>
+            <p itemprop="description">{{ product.short_description|truncatechars:90 }}</p>
+            <div class="urun-footer">
+              <span class="urun-standart">{{ product.certificate_codes|truncatechars:25 }}</span>
+              <span class="urun-detay-btn">Detay →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+    <nav class="pagination" aria-label="Sayfa navigasyonu">
+      {% if page_obj.has_previous %}
+      <a class="page-btn" href="?sayfa={{ page_obj.previous_page_number }}">‹</a>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <span class="page-btn active" aria-current="page">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="page-btn" href="?sayfa={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <a class="page-btn" href="?sayfa={{ page_obj.next_page_number }}">›</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <div style="text-align:center;padding:4rem 2rem;color:var(--metin-acik);">
+      <div style="font-size:4rem;margin-bottom:1rem;">{{ category.icon }}</div>
+      <h3 style="font-family:'Nunito',sans-serif;font-weight:800;margin-bottom:.5rem;">Bu kategoride henüz ürün yok</h3>
+      <p>Yakında eklenecek. <a href="{% url 'products:list' %}" style="color:var(--mavi);">Tüm ürünlere</a> göz atabilirsiniz.</p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

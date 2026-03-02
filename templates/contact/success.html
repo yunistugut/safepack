@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:560px;margin:6rem auto;text-align:center;padding:2rem;">
+  <div style="font-size:5rem;margin-bottom:1.5rem;">✅</div>
+  <h1 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2rem;color:var(--yesil);margin-bottom:.8rem;">
+    Talebiniz Alındı!
+  </h1>
+  <p style="color:var(--metin-acik);font-size:1rem;line-height:1.7;margin-bottom:2rem;">
+    Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz.<br>
+    Acil durumlar için <a href="tel:+90{{ CONTACT_PHONE|cut:' '|cut:'-' }}" style="color:var(--mavi);font-weight:600;">{{ CONTACT_PHONE }}</a> numaralı hattı arayabilirsiniz.
+  </p>
+  <a href="{% url 'products:list' %}" class="btn-cta" style="display:inline-block;padding:1rem 2rem;font-size:1rem;">Ürünleri İncele →</a>
+</div>
+{% endblock %}

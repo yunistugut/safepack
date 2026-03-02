@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Sayfa yolu">
+      <a href="{% url 'core:home' %}">Anasayfa</a><span>›</span>
+      <span aria-current="page">Hakkımızda</span>
+    </nav>
+    <h1>Hakkımızda</h1>
+    <p>İş güvenliğinde güvenilir çözüm ortağınız</p>
+  </div>
+</div>
+
+<div class="container" style="padding:4rem 2rem;">
+
+  {# TANITIM #}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:5rem;">
+    <div>
+      <div class="section-eyebrow">Biz Kimiz?</div>
+      <h2 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--mavi);margin:1rem 0 1.5rem;line-height:1.2;">
+        İstanbul'dan Türkiye'ye<br>CE Belgeli İSG Çözümleri
+      </h2>
+      <p style="color:var(--metin-acik);line-height:1.8;margin-bottom:1rem;">
+        SafePackISG olarak, iş sağlığı ve güvenliği ekipmanları ile ambalaj malzemeleri alanında
+        faaliyet göstermekteyiz. İstanbul Organize Sanayi Bölgesi'nde konumlanan firmamız,
+        sanayi kuruluşlarına, inşaat şirketlerine ve KOBİ'lere CE belgeli KKD ürünleri
+        ve endüstriyel ambalaj çözümleri sunmaktadır.
+      </p>
+      <p style="color:var(--metin-acik);line-height:1.8;">
+        3M, Honeywell, MSA Safety, Ansell gibi dünya markalarının Türkiye distribütörlüğünü
+        yürütmekte; aynı zamanda kendi markamız altında üretilen ürünlerle rekabetçi
+        fiyat avantajı sağlamaktayız.
+      </p>
+    </div>
+    <div style="background:linear-gradient(135deg,var(--mavi-koyu),var(--mavi-acik));border-radius:20px;height:320px;display:flex;align-items:center;justify-content:center;font-size:8rem;">
+      🛡️
+    </div>
+  </div>
+
+  {# RAKAMLAR #}
+  <div style="background:var(--gri);border-radius:18px;padding:3rem;margin-bottom:5rem;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;">
+      <div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.8rem;color:var(--turuncu);">500+</div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;color:var(--metin-acik);text-transform:uppercase;letter-spacing:1px;margin-top:.3rem;">Ürün Çeşidi</div>
+      </div>
+      <div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.8rem;color:var(--turuncu);">200+</div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;color:var(--metin-acik);text-transform:uppercase;letter-spacing:1px;margin-top:.3rem;">Kurumsal Müşteri</div>
+      </div>
+      <div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.8rem;color:var(--turuncu);">8</div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;color:var(--metin-acik);text-transform:uppercase;letter-spacing:1px;margin-top:.3rem;">Dünya Markası</div>
+      </div>
+      <div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.8rem;color:var(--turuncu);">%100</div>
+        <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;color:var(--metin-acik);text-transform:uppercase;letter-spacing:1px;margin-top:.3rem;">CE Belgeli Ürün</div>
+      </div>
+    </div>
+  </div>
+
+  {# MİSYON & VİZYON #}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:5rem;">
+    <div style="background:var(--mavi);color:#fff;border-radius:18px;padding:2.5rem;">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🎯</div>
+      <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;margin-bottom:1rem;">Misyonumuz</h3>
+      <p style="color:rgba(255,255,255,.8);line-height:1.8;font-size:.92rem;">
+        Çalışan güvenliğini ön planda tutarak, standart uyumlu ve ekonomik iş güvenliği
+        ekipmanlarını Türkiye'nin her köşesine ulaştırmak. Her işyerinin bütçesine uygun
+        KKD çözümleri sunmak.
+      </p>
+    </div>
+    <div style="background:var(--turuncu);color:#fff;border-radius:18px;padding:2.5rem;">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🔭</div>
+      <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;margin-bottom:1rem;">Vizyonumuz</h3>
+      <p style="color:rgba(255,255,255,.9);line-height:1.8;font-size:.92rem;">
+        Türkiye'nin en güvenilir iş güvenliği ekipmanları tedarikçisi olmak.
+        Dijital katalog ve hızlı teslimat altyapısıyla sektörde öncü konuma gelmek.
+      </p>
+    </div>
+  </div>
+
+  {# CTA #}
+  <div style="text-align:center;">
+    <a href="{% url 'contact:contact' %}" class="btn-cta" style="display:inline-block;padding:.9rem 2.5rem;font-size:.95rem;">
+      📞 Bizimle İletişime Geçin
+    </a>
+  </div>
+
+</div>
+{% endblock %}

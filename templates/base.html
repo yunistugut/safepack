@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{# ── Temel SEO ── #}
+<title>{% block title %}{{ meta_title|default:"SafePackISG | İş Güvenliği ve Ambalaj Malzemeleri" }}{% endblock %}</title>
+<meta name="description" content="{{ meta_description|default:"CE belgeli iş güvenliği ekipmanları ve ambalaj malzemeleri. Bilecik merkezli ISG tedarikçisi." }}">
+<meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+<link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+<meta name="theme-color" content="#1B4F8A">
+<meta name="author" content="SafePackISG">
+
+{# ── Open Graph ── #}
+<meta property="og:type" content="{% block og_type %}website{% endblock %}">
+<meta property="og:site_name" content="SafePackISG">
+<meta property="og:title" content="{{ meta_title|default:"SafePackISG" }}">
+<meta property="og:description" content="{{ meta_description|default:"CE belgeli iş güvenliği ekipmanları." }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:image" content="{% block og_image %}{% load static %}{% static 'img/og-image.jpg' %}{% endblock %}">
+<meta property="og:locale" content="tr_TR">
+
+{# ── Twitter Card ── #}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@safepackisg">
+<meta name="twitter:title" content="{{ meta_title|default:"SafePackISG" }}">
+<meta name="twitter:description" content="{{ meta_description|default:"CE belgeli iş güvenliği ekipmanları." }}">
+<meta name="twitter:image" content="{% block twitter_image %}{% load static %}{% static 'img/og-image.jpg' %}{% endblock %}">
+
+{# ── Geo ── #}
+<meta name="geo.region" content="TR-34">
+<meta name="geo.placename" content="Bilecik">
+<meta name="geo.position" content="39.9059687;30.0488502">
+
+{# ── Favicon ── #}
+<link rel="icon" href="{% load static %}{% static 'img/favicon.png' %}" type="image/png">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+
+{# ── Preconnect ── #}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://maps.googleapis.com">
+
+{# ── Fonts ── #}
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+{# ── CSS ── #}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block extra_css %}{% endblock %}
+
+{# ── Schema.org JSON-LD ── #}
+{% block schema %}{% endblock %}
+</head>
+<body>
+{% load static %}
+<a href="#main-content" class="skip-link">İçeriğe geç</a>
+
+{# ── Includes ── #}
+{% include 'includes/topbar.html' %}
+{% include 'includes/header.html' %}
+
+<main id="main-content" role="main">
+  {% block content %}{% endblock %}
+</main>
+
+{% include 'includes/footer.html' %}
+
+{# ── JS ── #}
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Sayfa yolu">
+      <a href="{% url 'core:home' %}">Anasayfa</a><span>›</span>
+      {% if category %}<a href="{% url 'blog:list' %}">Blog</a><span>›</span><span aria-current="page">{{ category.name }}</span>
+      {% else %}<span aria-current="page">Blog</span>{% endif %}
+    </nav>
+    <h1>{% if category %}{{ category.name }}{% else %}İş Güvenliği Blogu{% endif %}</h1>
+    <p>Uzman rehberleri, mevzuat güncellemeleri ve sektör haberleri</p>
+  </div>
+</div>
+
+<div class="blog-body">
+  <div>
+    {# ÖNE ÇIKAN YAZI #}
+    {% if featured and not category %}
+    <a href="{{ featured.get_absolute_url }}" class="featured-post" aria-label="Öne çıkan: {{ featured.title }}">
+      <div class="featured-img" aria-hidden="true">
+        {% if featured.thumbnail %}<img src="{{ featured.thumbnail.url }}" alt="{{ featured.title }}" style="width:100%;height:100%;object-fit:cover;">{% else %}📰{% endif %}
+      </div>
+      <div class="featured-content">
+        <div class="post-eyebrow">⭐ Öne Çıkan Yazı</div>
+        <h2>{{ featured.title }}</h2>
+        <p>{{ featured.excerpt }}</p>
+        <div class="post-meta">
+          {% if featured.published_at %}<span>📅 {{ featured.published_at|date:"d F Y" }}</span>{% endif %}
+          <span>⏱ {{ featured.read_time }} dk okuma</span>
+          {% if featured.category %}<span>🏷 {{ featured.category.name }}</span>{% endif %}
+        </div>
+        <span class="read-more">Devamını Oku →</span>
+      </div>
+    </a>
+    {% endif %}
+
+    {# KATEGORİ FİLTRE #}
+    <div class="blog-filter" role="group" aria-label="Blog kategorileri">
+      <a href="{% url 'blog:list' %}" class="filter-pill {% if not category %}active{% endif %}">Tümü</a>
+      {% for cat in categories %}
+      <a href="{{ cat.get_absolute_url }}" class="filter-pill {% if category.slug == cat.slug %}active{% endif %}">
+        {{ cat.name }} <small>({{ cat.post_count }})</small>
+      </a>
+      {% endfor %}
+    </div>
+
+    {# YAZI LİSTESİ #}
+    <div class="post-grid" role="list">
+      {% for post in page_obj %}
+      <article role="listitem" itemscope itemtype="https://schema.org/BlogPosting">
+        <a href="{{ post.get_absolute_url }}" class="post-kart">
+          <div class="post-img" aria-hidden="true">
+            {% if post.thumbnail %}<img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" style="width:100%;height:100%;object-fit:cover;">{% else %}📰{% endif %}
+          </div>
+          <div class="post-content">
+            {% if post.category %}<div class="post-tag" itemprop="articleSection">{{ post.category.name }}</div>{% endif %}
+            <h3 itemprop="headline">{{ post.title }}</h3>
+            <p itemprop="description">{{ post.excerpt|truncatechars:120 }}</p>
+            <div class="post-footer">
+              <span class="post-date">
+                {% if post.published_at %}📅 <time itemprop="datePublished" datetime="{{ post.published_at|date:'Y-m-d' }}">{{ post.published_at|date:"d F Y" }}</time>{% endif %}
+                · ⏱ {{ post.read_time }} dk
+              </span>
+              <span class="post-link">Oku →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% empty %}
+      <p style="padding:2rem;color:var(--metin-acik);grid-column:1/-1;">Henüz yazı yok.</p>
+      {% endfor %}
+    </div>
+
+    {# PAGİNASYON #}
+    {% if page_obj.has_other_pages %}
+    <nav class="pagination" aria-label="Sayfa navigasyonu">
+      {% if page_obj.has_previous %}
+      <a class="page-btn" href="?sayfa={{ page_obj.previous_page_number }}">‹</a>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <span class="page-btn active" aria-current="page">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="page-btn" href="?sayfa={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <a class="page-btn" href="?sayfa={{ page_obj.next_page_number }}">›</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </div>
+
+  {# SIDEBAR #}
+  <aside class="blog-sidebar" aria-label="Blog yan panel">
+    <div class="s-card">
+      <div class="s-card-head">🔍 Ara</div>
+      <div class="s-card-body">
+        <form class="search-box" role="search" method="get" action="{% url 'blog:list' %}">
+          <input class="search-input" type="search" name="q" value="{{ query }}" placeholder="Blog'da ara…" aria-label="Blog'da ara">
+          <button class="search-btn" type="submit" aria-label="Ara">🔍</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-card-head">🔥 Son Yazılar</div>
+      <div class="s-card-body">
+        <div class="popular-list">
+          {% for post in popular %}
+          <a href="{{ post.get_absolute_url }}" class="popular-item">
+            <div class="popular-num">0{{ forloop.counter }}</div>
+            <div>
+              <div class="popular-title">{{ post.title|truncatechars:50 }}</div>
+              {% if post.published_at %}<div class="popular-date">{{ post.published_at|date:"d M Y" }}</div>{% endif %}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-card-head">🗂 Kategoriler</div>
+      <div class="s-card-body">
+        <div class="kat-list">
+          {% for cat in categories %}
+          <a href="{{ cat.get_absolute_url }}">
+            {{ cat.name }} <span class="kc">{{ cat.post_count }}</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+{% endblock %}
